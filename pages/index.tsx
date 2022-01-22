@@ -30,6 +30,14 @@ const Page: NextPage = () => {
           ワークスペースにGitのリポジトリをコピーして利用してください。
         </Typography>
         <Typography paragraph>
+          ターミナルの作業ディレクトリをワークスペースへ移動する。
+        </Typography>
+        <Typography paragraph>
+          <CodeButton>
+            cd ワークスペースのパス
+          </CodeButton>
+        </Typography>
+        <Typography paragraph>
           GitHubからリポジトリをコピーする。
         </Typography>
         <Typography paragraph>
@@ -49,7 +57,7 @@ const Page: NextPage = () => {
           パッケージのインストール
         </Typography>
         <Typography paragraph>
-          プロジェクトを動かすために必要なパッケージをインストールする。
+          必要なパッケージをインストールする。
         </Typography>
         <Typography paragraph>
           <CodeButton copy>
