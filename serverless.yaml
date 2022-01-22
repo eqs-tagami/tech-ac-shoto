@@ -1,0 +1,18 @@
+# https://github.com/serverless-nextjs/serverless-next.js
+# https://www.serverless.com/framework/docs/providers/aws/guide/serverless.yml
+myNextApplication:
+  component: "@sls-next/serverless-component@3.6.0"
+  inputs:
+    bucketName: template-foo-jp
+    bucketRegion: ap-northeast-1
+    # roleArn: "arn:aws:iam::125843355691:role/TemplateFooJpRole"
+    name:
+      defaultLambda: TemplateFooJp
+      apiLambda: TemplateFooJpApi
+      imageLambda: TemplateFooJpImage
+    description: "Next.js Template"
+    timeout: 30
+    memory: 512
+    # architecture: arm64
+    # cloudfront:
+    #   distributionId: E348Y8D322Z06H
