@@ -64,7 +64,7 @@ npm i -g serverless
 
 ### Serverless Frameworkの設定
 
-プロジェクト直下にある serverless.yaml を開き、アプリケーション名やS3のバケット名などを設定してください。
+プロジェクト直下にある [serverless.yaml](./serverless.yaml) を開き、アプリケーション名やS3のバケット名などを設定してください。
 
 ### AWSへデプロイする
 
