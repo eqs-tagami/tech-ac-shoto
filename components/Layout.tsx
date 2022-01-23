@@ -32,6 +32,7 @@ import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import Zoom from '@mui/material/Zoom';
 import Tooltip from '@mui/material/Tooltip';
 import Container from '@mui/material/Container';
+import Collapse from '@mui/material/Collapse';
 
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import MenuIcon from '@mui/icons-material/MenuRounded';
@@ -49,6 +50,9 @@ import LocalMallRoundedIcon from '@mui/icons-material/LocalMallRounded';
 import SettingsRoundedIcon from '@mui/icons-material/SettingsRounded';
 import ArticleRoundedIcon from '@mui/icons-material/ArticleRounded';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
+import ExpandLessIcon from '@mui/icons-material/ExpandLessRounded';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMoreRounded';
+import EmojiObjectsIcon from '@mui/icons-material/EmojiObjectsRounded';
 // import InboxIcon from '@mui/icons-material/MoveToInboxRounded';
 // import MoreIcon from '@mui/icons-material/MoreVertRounded';
 // import FolderIcon from '@mui/icons-material/FolderRounded';
@@ -60,6 +64,9 @@ import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 
 import FontAwesomeSvgIcon from '@components/FontAwesomeSvgIcon';
 import { faAws } from '@fortawesome/free-brands-svg-icons';
+import { faQuestion } from '@fortawesome/free-solid-svg-icons';
+
+import { getNodeText } from '@lib/util';
 
 // サイドバーの横幅
 const drawerWidth = 240;
@@ -116,27 +123,53 @@ export default function Layout(props:{
     setNavigationValue(newValue);
   };
 
+
+  const [subitemOpens, setSubitemOpens] = React.useState<{[key:string]:boolean}>({});
+  const handleSubitemOpenClick = (key:string) => () => {
+    const open = subitemOpens[key];
+    setSubitemOpens({...subitemOpens,[key]:!open})
+  }
   // ナビゲーションのリスト作成
   const createNavigationList = (items:{
-    href: string | UrlObject
+    href?: string | UrlObject
     text: React.ReactNode
     icon: React.ReactNode
     badge?: React.ReactNode
+    subitems?: any
   }[]) => (
     <List sx={{'& a':{display:'block', color:'inherit', textDecoration:'none'}}}>
       {items.map((item, index) => (
-        <Link href={item.href} key={index}>
-          <a>
-            <ListItem button>
-              <ListItemIcon>
-                {item.badge
-                  ? <Badge badgeContent={item.badge} color="warning">{item.icon}</Badge>
-                  : item.icon}
-              </ListItemIcon>
-              <ListItemText primary={item.text} />
-            </ListItem>
-          </a>
-        </Link>
+        <>
+        {item.href && 
+          <Link href={item.href} key={index}>
+            <a>
+              <ListItem button>
+                <ListItemIcon>
+                  {item.badge
+                    ? <Badge badgeContent={item.badge} color="warning">{item.icon}</Badge>
+                    : item.icon}
+                </ListItemIcon>
+                <ListItemText primary={item.text} />
+              </ListItem>
+            </a>
+          </Link>
+        }
+        {!item.href && item.subitems && <>
+          <ListItem button onClick={handleSubitemOpenClick(getNodeText(item.text))}>
+            <ListItemIcon>
+              {item.badge
+                ? <Badge badgeContent={item.badge} color="warning">{item.icon}</Badge>
+                : item.icon}
+            </ListItemIcon>
+            <ListItemText primary={item.text} />
+            {subitemOpens[getNodeText(item.text)] ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+          </ListItem>
+          <Collapse in={Boolean(subitemOpens[getNodeText(item.text)])} timeout="auto" unmountOnExit>
+            {createNavigationList(item.subitems)}
+          </Collapse>
+        </>}
+
+        </>
       ))}
     </List>
   )
@@ -365,10 +398,14 @@ export default function Layout(props:{
                   onMouseLeave:handleDrawerCloseTmp,
                 }))()}>
                 {createNavigationList([
-                  {text:'はじめに',href:'/',icon:<HomeRoundedIcon />}, 
-                  {text:'AWS',href:'/aws',icon:<FontAwesomeSvgIcon icon={faAws} />}, 
+                  {text:'はじめに',href:'/',icon:<HomeRoundedIcon />},
+                  {text:'AWS',href:'/aws',icon:<FontAwesomeSvgIcon icon={faAws} />},
+                  {text:'JS問題',icon:<FontAwesomeSvgIcon icon={faQuestion} />, badge:2, subitems:[
+                    {text:'01:数値を2倍',href:'/question/q001',icon:<EmojiObjectsIcon />},
+                    {text:'02:整数の絶対値',href:'/question/q002',icon:<EmojiObjectsIcon />},
+                  ]},
                   // {text:'ダッシュボード',href:'/',icon:<DashboardIcon />}, 
-                  {text:'注文',href:'/',icon:<ShoppingCartIcon />,badge:3}, 
+                  {text:'注文',href:'/',icon:<ShoppingCartIcon />}, 
                   {text:'顧客',href:'/',icon:<PeopleIcon />}, 
                   {text:'レポート',href:'/',icon:<BarChartIcon />},
                   {text:'商品',href:'/',icon:<LocalMallRoundedIcon />},
@@ -497,8 +534,10 @@ export default function Layout(props:{
         >
           <BottomNavigationAction label="はじめに" icon={<HomeRoundedIcon />} />
           <BottomNavigationAction label="AWS" icon={<FontAwesomeSvgIcon icon={faAws} />} />
-          <BottomNavigationAction label="注文" icon={
-            <Badge badgeContent={3} color="warning"><ShoppingCartIcon /></Badge>
+          <BottomNavigationAction label="JS問題" icon={
+            <Badge badgeContent={2} color="warning">
+              <FontAwesomeSvgIcon icon={faQuestion} />
+            </Badge>
           } />
           <BottomNavigationAction label="顧客" icon={<PeopleIcon />} />
           <BottomNavigationAction label="レポート" icon={<BarChartIcon />} />

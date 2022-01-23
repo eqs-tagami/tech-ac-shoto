@@ -20,7 +20,7 @@ import CodeButton from "@components/CodeButton";
 import CodeBlock from "@components/CodeBlock";
 
 const Page: NextPage = () => {
-  const { control, formState, getValues } = useForm({ mode:'all', delayError:200 });
+  const { control, formState, getValues } = useForm({ mode:'all', /*delayError:200*/ });
   const [ lsLoad, setLsLoad ] = useState(false);
   const [ values, setValues ] = useState<{[key:string]:any}>({});
 
