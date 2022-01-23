@@ -77,6 +77,7 @@ const Page: NextPage = () => {
                 inputRef={ref} onChange={handleChange(fs,onChange)} value={values[fs.name]}{...fs} />
             }
             rules={{
+              required: '必須項目です',
               pattern: { value: /^-?[0-9]+$/, message: '整数で入力してください'}
             }}
             control={control}

@@ -20,7 +20,7 @@ import CodeButton from "@components/CodeButton";
 import CodeBlock from "@components/CodeBlock";
 
 const Page: NextPage = () => {
-  const { control, formState, getValues } = useForm({ mode:'all', /*delayError:200*/ });
+  const { control, formState, getValues, setValue } = useForm({ mode:'all', /*delayError:200*/ });
   const [ lsLoad, setLsLoad ] = useState(false);
   const [ values, setValues ] = useState<{[key:string]:any}>({});
 
@@ -29,13 +29,16 @@ const Page: NextPage = () => {
       const ls:any = {};
       for (let i=0; i<window.localStorage.length; i++){
         const key = window.localStorage.key(i);
-        if(key && !key.endsWith('cache'))
-          ls[key] = window.localStorage.getItem(key);
+        if(key && !key.endsWith('cache')){
+          const value = window.localStorage.getItem(key);
+          ls[key] = value;
+          setValue(key, value);
+        }
       }
       setValues({...values,...ls});
       setLsLoad(true);
     }
-  }, [lsLoad]);
+  });
 
   const handleChange = ({name}:{name:string},onChange:any) => 
     (event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
