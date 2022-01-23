@@ -6,8 +6,8 @@ import NProgress from 'nprogress'
 import { Provider } from 'react-redux'
 import createStore from '@lib/createStore'
 
-import '/styles/globals.scss'
 import 'nprogress/nprogress.css'
+import '/styles/globals.scss'
 
 // バーの設定
 //    showSpinner: バーと一緒にローディングスピナーを表示するかどうか

@@ -1,8 +1,9 @@
 import * as React from 'react';
-import { styled, alpha, useTheme, Theme, Breakpoint, CSSObject } from '@mui/material/styles';
 import { css } from '@emotion/react';
 import Link from 'next/link';
 import { UrlObject } from 'url';
+
+import { styled, alpha, useTheme, Theme, Breakpoint, CSSObject } from '@mui/material/styles';
 import { SystemStyleObject } from '@mui/system';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
@@ -32,6 +33,7 @@ import Zoom from '@mui/material/Zoom';
 import Tooltip from '@mui/material/Tooltip';
 import Container from '@mui/material/Container';
 
+import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import MenuIcon from '@mui/icons-material/MenuRounded';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeftRounded';
 import ChevronRightIcon from '@mui/icons-material/ChevronRightRounded';
@@ -55,6 +57,9 @@ import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 // import ArchiveIcon from '@mui/icons-material/ArchiveRounded';
 // import LocationOnIcon from '@mui/icons-material/LocationOnRounded';
 // import LayersIcon from '@mui/icons-material/LayersRounded';
+
+import FontAwesomeSvgIcon from '@components/FontAwesomeSvgIcon';
+import { faAws } from '@fortawesome/free-brands-svg-icons';
 
 // サイドバーの横幅
 const drawerWidth = 240;
@@ -360,7 +365,9 @@ export default function Layout(props:{
                   onMouseLeave:handleDrawerCloseTmp,
                 }))()}>
                 {createNavigationList([
-                  {text:'ダッシュボード',href:'/',icon:<DashboardIcon />}, 
+                  {text:'はじめに',href:'/',icon:<HomeRoundedIcon />}, 
+                  {text:'AWS',href:'/aws',icon:<FontAwesomeSvgIcon icon={faAws} />}, 
+                  // {text:'ダッシュボード',href:'/',icon:<DashboardIcon />}, 
                   {text:'注文',href:'/',icon:<ShoppingCartIcon />,badge:3}, 
                   {text:'顧客',href:'/',icon:<PeopleIcon />}, 
                   {text:'レポート',href:'/',icon:<BarChartIcon />},
@@ -488,13 +495,14 @@ export default function Layout(props:{
             },
           }}
         >
-          <BottomNavigationAction label="ボード" icon={<DashboardIcon />} />
+          <BottomNavigationAction label="はじめに" icon={<HomeRoundedIcon />} />
+          <BottomNavigationAction label="AWS" icon={<FontAwesomeSvgIcon icon={faAws} />} />
           <BottomNavigationAction label="注文" icon={
             <Badge badgeContent={3} color="warning"><ShoppingCartIcon /></Badge>
           } />
           <BottomNavigationAction label="顧客" icon={<PeopleIcon />} />
           <BottomNavigationAction label="レポート" icon={<BarChartIcon />} />
-          <BottomNavigationAction label="商品" icon={<LocalMallRoundedIcon />} />
+          
         </BottomNavigation>
       </Paper>
     </Box>

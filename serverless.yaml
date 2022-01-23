@@ -3,14 +3,14 @@
 myNextApplication:
   component: "@sls-next/serverless-component@3.6.0"
   inputs:
-    bucketName: template-foo-jp
+    bucketName: eqs-tech-ac
     bucketRegion: ap-northeast-1
-    # roleArn: "arn:aws:iam::125843355691:role/TemplateFooJpRole"
+    # roleArn: "arn:aws:iam::125843355691:role/EqsTechAcRole"
     name:
-      defaultLambda: TemplateFooJp
-      apiLambda: TemplateFooJpApi
-      imageLambda: TemplateFooJpImage
-    description: "Next.js Template"
+      defaultLambda: TechAc
+      apiLambda: TechAcApi
+      imageLambda: TechAcImage
+    description: "TechAc"
     timeout: 30
     memory: 512
     # architecture: arm64
