@@ -1,17 +1,7 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import Image from 'next/image'
-import Link from 'next/link'
-import { useRouter } from 'next/router'
-import React, { useEffect, useState } from 'react'
-import Script from 'next/script'
-import { useForm, Controller, 
-  ControllerRenderProps, FieldValues, ControllerFieldState, UseFormStateReturn } from "react-hook-form";
-
-import TextField from '@mui/material/TextField';
+import React from 'react';
 import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import MuiLink from '@mui/material/Link';
 import Divider from '@mui/material/Divider';
 
@@ -20,32 +10,6 @@ import CodeButton from "@components/CodeButton";
 import CodeBlock from "@components/CodeBlock";
 
 const Page: NextPage = () => {
-  const { control, formState, getValues } = useForm({ mode:'all' });
-  const [ lsLoad, setLsLoad ] = useState(false);
-  const [ values, setValues ] = useState<{[key:string]:any}>({});
-
-  useEffect(() => {
-    if (typeof window !== 'undefined' && !lsLoad) {
-      const ls:any = {};
-      for (let i=0; i<window.localStorage.length; i++){
-        const key = window.localStorage.key(i);
-        if(key && !key.endsWith('cache'))
-          ls[key] = window.localStorage.getItem(key);
-      }
-      setValues({...values,...ls});
-      setLsLoad(true);
-    }
-  }, [lsLoad]);
-
-  const handleChange = ({name}:{name:string},onChange:any) => 
-    (event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
-    const value = event.target.value;
-    if (typeof window !== 'undefined')
-      window.localStorage.setItem(name, value);
-    setValues({...values,[name]:value});
-    onChange(event);
-  }
-
   return (
     <>
       <Head>

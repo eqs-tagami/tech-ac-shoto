@@ -3,6 +3,10 @@ import { css } from '@emotion/react';
 import Link from 'next/link';
 import { UrlObject } from 'url';
 
+import { useSelector, useDispatch } from 'react-redux'
+import { StoreState } from '@lib/createStore'
+import { navigationSlice } from '@lib/slice/navigation'
+
 import { styled, alpha, useTheme, Theme, Breakpoint, CSSObject } from '@mui/material/styles';
 import { SystemStyleObject } from '@mui/system';
 import Box from '@mui/material/Box';
@@ -79,14 +83,15 @@ export default function Layout(props:{
 }) {
   const theme = useTheme();
   const scrollTrigger = useScrollTrigger();
-
+  const dispatch = useDispatch();
+  
   // ドロワーの開閉
-  const [open, setOpen] = React.useState(true);
+  const open = useSelector((state:StoreState) => state.navigation.open);
   const handleDrawerOpen = () => {
-    setOpen(true);
+    dispatch(navigationSlice.actions.setOpen(true));
   };
   const handleDrawerClose = () => {
-    setOpen(false);
+    dispatch(navigationSlice.actions.setOpen(false));
     setOpenTmp(false);
   };
 
@@ -118,17 +123,17 @@ export default function Layout(props:{
   };
 
   // ボトムナビゲーション
-  const [navigationValue, setNavigationValue] = React.useState('recents');
+  const [navigationValue, setNavigationValue] = React.useState('');
   const handleNavigationChange = (event: React.SyntheticEvent, newValue: string) => {
     setNavigationValue(newValue);
   };
 
-
-  const [subitemOpens, setSubitemOpens] = React.useState<{[key:string]:boolean}>({});
+  // ナビゲーションのサブリストのステート
+  const subitemOpens = useSelector((state:StoreState) => state.navigation.subitemOpens);
   const handleSubitemOpenClick = (key:string) => () => {
-    const open = subitemOpens[key];
-    setSubitemOpens({...subitemOpens,[key]:!open})
+    dispatch(navigationSlice.actions.setSubitemOpens(key));
   }
+
   // ナビゲーションのリスト作成
   const createNavigationList = (items:{
     href?: string | UrlObject

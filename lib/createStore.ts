@@ -3,6 +3,7 @@ import logger from 'redux-logger'
 import { configureStore } from '@reduxjs/toolkit'
 
 import { counterSlice, initialState as counterState } from '@lib/slice/counter'
+import { navigationSlice, initialState as navigationState } from '@lib/slice/navigation'
 
 /**
  * アプリが複雑になってくると、リデューシング関数を別々の関数に分割して、
@@ -16,10 +17,12 @@ import { counterSlice, initialState as counterState } from '@lib/slice/counter'
  */
 const reducer = combineReducers({
   counter: counterSlice.reducer,
+  navigation: navigationSlice.reducer,
 })
 
 const preloadedState = () => ({
   counter: counterState,
+  navigation: navigationState,
 })
 
 export type StoreState = ReturnType<typeof preloadedState>;

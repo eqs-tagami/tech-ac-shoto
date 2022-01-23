@@ -71,8 +71,6 @@ function MyApp({ Component, pageProps }: AppProps) {
       <meta property="og:site_name" content=""/>
       <meta property="og:locale" content="ja"/>
       <meta name="twitter:card" content="summary_large_image"/>
-
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"/>
     </Head>
 
     {/*
