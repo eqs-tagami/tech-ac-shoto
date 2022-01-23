@@ -144,8 +144,7 @@ export default function Layout(props:{
   }[]) => (
     <List sx={{'& a':{display:'block', color:'inherit', textDecoration:'none'}}}>
       {items.map((item, index) => (
-        <>
-        {item.href && 
+        item.href?
           <Link href={item.href} key={index}>
             <a>
               <ListItem button>
@@ -158,23 +157,23 @@ export default function Layout(props:{
               </ListItem>
             </a>
           </Link>
-        }
-        {!item.href && item.subitems && <>
-          <ListItem button onClick={handleSubitemOpenClick(getNodeText(item.text))}>
-            <ListItemIcon>
-              {item.badge
-                ? <Badge badgeContent={item.badge} color="warning">{item.icon}</Badge>
-                : item.icon}
-            </ListItemIcon>
-            <ListItemText primary={item.text} />
-            {subitemOpens[getNodeText(item.text)] ? <ExpandLessIcon /> : <ExpandMoreIcon />}
-          </ListItem>
-          <Collapse in={Boolean(subitemOpens[getNodeText(item.text)])} timeout="auto" unmountOnExit>
-            {createNavigationList(item.subitems)}
-          </Collapse>
-        </>}
-
-        </>
+          :
+          <Box key={index}>
+            <ListItem button onClick={handleSubitemOpenClick(getNodeText(item.text))}>
+              <ListItemIcon>
+                {item.badge
+                  ? <Badge badgeContent={item.badge} color="warning">{item.icon}</Badge>
+                  : item.icon}
+              </ListItemIcon>
+              <ListItemText primary={item.text} />
+              {subitemOpens[getNodeText(item.text)] ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+            </ListItem>
+            {item.subitems && 
+            <Collapse in={Boolean(subitemOpens[getNodeText(item.text)])} timeout="auto" unmountOnExit>
+              {createNavigationList(item.subitems)}
+            </Collapse>
+            }
+          </Box>
       ))}
     </List>
   )
