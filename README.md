@@ -1,24 +1,32 @@
-# Next.js テンプレート v3
+# 開発学習プロジェクト
 
-このプロジェクトはNext.js用のテンプレートです。
+このプロジェクトは開発学習用のプロジェクトです。
 ワークスペースにGitのリポジトリをコピーして利用してください。
+
+## テンプレートのダウンロード
 
 ターミナルの作業ディレクトリをワークスペースへ移動する。
 
 ```bash
-cd ワークスペースのパス
+cd {ワークスペースのパス}
 ```
 
-GitHubからリポジトリをコピーする。
+GitHubからリポジトリをダウンロードする。
 
 ```bash
-git clone https://github.com/daichi-group/nextjs-template3.git
+git clone https://github.com/daichi-group/tech-ac.git tech-ac-{名前}
 ```
 
 作業ディレクトリを移動する。
 
 ```bash
-cd nextjs-template3
+cd  tech-ac-{名前}
+```
+
+リモートリポジトリを変更する。
+
+```bash
+git remote set-url origin https://github.com/daichi-group/tech-ac-{名前}.git
 ```
 
 ## パッケージのインストール
