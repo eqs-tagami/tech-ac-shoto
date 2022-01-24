@@ -1,6 +1,6 @@
-import type {NextPage} from 'next'
-import Head from 'next/head'
-import React from 'react'
+import type {NextPage} from 'next';
+import Head from 'next/head';
+import React from 'react';
 import {useForm, Controller} from "react-hook-form";
 import {TextField, Typography, Divider} from '@mui/material';
 import Layout from "@components/Layout";

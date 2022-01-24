@@ -1,10 +1,19 @@
-import type { AppProps } from 'next/app'
-import Script from 'next/script'
-import Head from 'next/head'
-import Router from 'next/router'
-import NProgress from 'nprogress'
-import { Provider } from 'react-redux'
-import createStore from '@lib/createStore'
+import type { AppProps } from 'next/app';
+import Script from 'next/script';
+import Head from 'next/head';
+import Router from 'next/router';
+import NProgress from 'nprogress';
+import { Provider } from 'react-redux';
+import createStore from '@lib/createStore';
+
+import PropTypes from "prop-types";
+// import { ThemeProvider } from "@mui/material/styles";
+import { CacheProvider, EmotionCache } from "@emotion/react";
+// import theme from "@lib/theme";
+import createEmotionCache from "@lib/createEmotionCache";
+
+// クライアント側のキャッシュで、ブラウザのユーザーのセッション全体に対して共有される。
+const clientSideEmotionCache = createEmotionCache();
 
 import 'nprogress/nprogress.css'
 import '/styles/globals.scss'
@@ -44,8 +53,12 @@ Router.events.on('routeChangeError', (err)=>{
 //   console.log("hashChangeComplete",url);
 // })
 
+interface MyAppProps extends AppProps {
+  emotionCache?: EmotionCache;
+}
 
-function MyApp({ Component, pageProps }: AppProps) {
+function MyApp({ Component, pageProps, emotionCache = clientSideEmotionCache }: MyAppProps) {
+
   return <>
     <Head>
       {/* テスト環境のページが検索エンジンに登録されることを回避する */}
@@ -82,11 +95,22 @@ function MyApp({ Component, pageProps }: AppProps) {
     <Script src="https://maps.googleapis.com/maps/api/js?key=" strategy="beforeInteractive" defer/>
     */}
 
-    <Provider store={createStore}>
-      <Component {...pageProps} />
-    </Provider>
+    <CacheProvider value={emotionCache}>
+      {/* <ThemeProvider theme={theme}> */}
+        <Provider store={createStore}>
+          <Component {...pageProps} />
+        </Provider>
+      {/* </ThemeProvider> */}
+    </CacheProvider>
   </>
 }
+
+MyApp.propTypes = {
+  Component: PropTypes.elementType.isRequired,
+  emotionCache: PropTypes.object,
+  pageProps: PropTypes.object.isRequired,
+};
+
 export default MyApp
 
 declare global {
