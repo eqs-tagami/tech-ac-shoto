@@ -10,6 +10,9 @@ class MyDocument extends Document {
       <Html lang="ja">
         <Head>
           <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"/>
+          {/* https://github.com/mui-org/material-ui/tree/master/examples/nextjs */}
+          {/* prepend:true の設定と一致するように、最初にMUIスタイルを注入する。 */}
+          {/* {this.props.emotionStyleTags} */}
         </Head>
         <body>
           <Main />
