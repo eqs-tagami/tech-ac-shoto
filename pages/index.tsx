@@ -70,7 +70,7 @@ const Page: NextPage = () => {
         <Typography paragraph>
           Visual Studio Codeのワークスペースのパスを入力してください。
         </Typography>
-        <Typography paragraph>
+        <Typography paragraph component="div">
           <Controller
             name="workspace"
             render={({field:{ref,value,onChange,...fs},fieldState:{error}}) => 
@@ -84,7 +84,7 @@ const Page: NextPage = () => {
         <Typography paragraph>
           名前を半角英字で入力してください。
         </Typography>
-        <Typography paragraph>
+        <Typography paragraph component="div">
           <Controller
             name="name"
             render={({field:{ref,value,onChange,...fs},fieldState:{error}}) => 
@@ -163,7 +163,6 @@ const Page: NextPage = () => {
           </MuiLink>
           のページにアクセスし、ファイルがアップロードされていることを確認する。
         </Typography>
-
         <Typography paragraph variant="h2" component="h2" sx={{fontSize:'24px',fontWeight:700,mt:5,mb:0.5}}>
           パッケージのインストール
         </Typography>

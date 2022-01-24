@@ -56,7 +56,7 @@ const Page: NextPage = () => {
         <Typography paragraph>
           整数を入力してください。
         </Typography>
-        <Typography paragraph>
+        <Typography paragraph component="div">
           <Controller
             name="value01"
             render={({field:{ref,value,onChange,...fs},fieldState:{error}}) => 
@@ -74,7 +74,7 @@ const Page: NextPage = () => {
           処理結果
         </Typography>
         <Divider sx={{mb:2}}/>
-        <Typography paragraph>
+        <Typography paragraph component="div">
           <ResultBox notinput={values.value01==null}>
             {mainProcessing(values.value01) as any}
           </ResultBox>
