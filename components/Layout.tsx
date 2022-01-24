@@ -545,7 +545,6 @@ export default function Layout(props:{
           } />
           <BottomNavigationAction label="顧客" icon={<PeopleIcon />} />
           <BottomNavigationAction label="レポート" icon={<BarChartIcon />} />
-          
         </BottomNavigation>
       </Paper>
     </Box>
