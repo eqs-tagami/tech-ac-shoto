@@ -2,19 +2,20 @@ import type {NextPage} from 'next'
 import Head from 'next/head'
 import React from 'react'
 import {useForm, Controller} from "react-hook-form";
-import {TextField, Typography, Divider, Alert} from '@mui/material';
+import {TextField, Typography, Divider} from '@mui/material';
 import Layout from "@components/Layout";
+import ResultBox from "@components/ResultBox";
 
 const Page: NextPage = () => {
 
   /**
-   * 指定された値を２倍にする
+   * 指定された値を2倍にする
    * @param inputValue フォームで入力された値
    */
   const mainProcessing = (inputValue:any) => {
     // TODO: ここに実装する
     
-
+    
   }
 
   const { control } = useForm({ mode:'all' });
@@ -74,11 +75,9 @@ const Page: NextPage = () => {
         </Typography>
         <Divider sx={{mb:2}}/>
         <Typography paragraph>
-          {((inputValue)=>{
-            const result = inputValue!=null? mainProcessing(inputValue) : "入力フォームに数値が入力されていません";
-            const severity = inputValue!=null? result==null? "error" : "success" : "warning";
-            return <Alert icon={false} severity={severity} sx={{fontSize:'16px'}}>{String(result)}</Alert>
-          })(values.value01)}
+          <ResultBox notInput={values.value01==null}>
+            {mainProcessing(values.value01) as any}
+          </ResultBox>
         </Typography>
       </Layout>
     </>
