@@ -60,42 +60,42 @@ interface MyAppProps extends AppProps {
 function MyApp({ Component, pageProps, emotionCache = clientSideEmotionCache }: MyAppProps) {
 
   return <>
-    <Head>
-      {/* テスト環境のページが検索エンジンに登録されることを回避する */}
-      <meta name="robots" content="noindex,nofollow"/>
-
-      <title>Daichi Next</title>
-      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-      <meta charSet="utf-8"/>
-      <meta httpEquiv="X-UA-Compatible" content="IE=edge"/>
-      <meta name="keywords" content=""/>
-      <meta name="description" content=""/>
-      <link rel="icon" href="/icon.svg"/>
-      <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"/>
-      <link rel="canonical" href=""/>
-      <meta name="format-detection" content="telephone=no"/>
-      <meta property="og:title" content=""/>
-      <meta property="og:type" content="website"/>
-      <meta property="og:image" content=""/>
-      <meta property="og:image:width" content="1200"/>
-      <meta property="og:image:height" content="630"/>
-      <meta property="og:url" content=""/>
-      <meta property="og:description" content=""/>
-      <meta property="og:site_name" content=""/>
-      <meta property="og:locale" content="ja"/>
-      <meta name="twitter:card" content="summary_large_image"/>
-    </Head>
-
-    {/*
-      strategy="afterInteractive" を指定すると、useEffectより後にScriptが読み込まれる
-      [next/scriptのJavaScriptの基本](https://zenn.dev/aiji42/articles/9a6ab12ab5f6e6)
-      */}
-    {/*
-    <Script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" strategy="beforeInteractive" defer/>
-    <Script src="https://maps.googleapis.com/maps/api/js?key=" strategy="beforeInteractive" defer/>
-    */}
-
     <CacheProvider value={emotionCache}>
+      <Head>
+        {/* テスト環境のページが検索エンジンに登録されることを回避する */}
+        <meta name="robots" content="noindex,nofollow"/>
+
+        <title>Daichi Next</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <meta charSet="utf-8"/>
+        <meta httpEquiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="keywords" content=""/>
+        <meta name="description" content=""/>
+        <link rel="icon" href="/icon.svg"/>
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"/>
+        <link rel="canonical" href=""/>
+        <meta name="format-detection" content="telephone=no"/>
+        <meta property="og:title" content=""/>
+        <meta property="og:type" content="website"/>
+        <meta property="og:image" content=""/>
+        <meta property="og:image:width" content="1200"/>
+        <meta property="og:image:height" content="630"/>
+        <meta property="og:url" content=""/>
+        <meta property="og:description" content=""/>
+        <meta property="og:site_name" content=""/>
+        <meta property="og:locale" content="ja"/>
+        <meta name="twitter:card" content="summary_large_image"/>
+      </Head>
+
+      {/*
+        strategy="afterInteractive" を指定すると、useEffectより後にScriptが読み込まれる
+        [next/scriptのJavaScriptの基本](https://zenn.dev/aiji42/articles/9a6ab12ab5f6e6)
+        */}
+      {/*
+      <Script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" strategy="beforeInteractive" defer/>
+      <Script src="https://maps.googleapis.com/maps/api/js?key=" strategy="beforeInteractive" defer/>
+      */}
+
       {/* <ThemeProvider theme={theme}> */}
         <Provider store={createStore}>
           <Component {...pageProps} />

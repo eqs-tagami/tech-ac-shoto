@@ -13,14 +13,15 @@ export default function ResultBox(props: AlertProps & {
 }){
   const theme = useTheme();
   const {
+    notinput,
     sx,
     children,
     ...alertProps
   } = props;
 
   const [check, setCheck] = React.useState<React.ReactNode>(false);
-  const result = props.notinput? "入力フォームに数値が入力されていません" : children;
-  const severity = props.notinput? "warning" : children==null? "error" : "success";
+  const result = notinput? "入力フォームに数値が入力されていません" : children;
+  const severity = notinput? "warning" : children==null? "error" : "success";
 
   const handleCopy = (text: string, result: boolean) => {
     if(result){
