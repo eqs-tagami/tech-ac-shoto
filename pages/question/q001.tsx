@@ -32,7 +32,7 @@ const Page: NextPage = () => {
         <title>01:数値を2倍 - Daichi Next</title>
       </Head>
       <Layout>
-        <Typography paragraph variant="h1" component="h1" sx={{fontSize:'36px',fontWeight:700,mb:0.5}}>
+        <Typography paragraph variant="h1" component="h1" sx={{fontSize:'32px',fontWeight:700,mb:0.5}}>
           問01 - 数値を2倍
         </Typography>
         <Divider sx={{mb:2}}/>
@@ -75,7 +75,7 @@ const Page: NextPage = () => {
         </Typography>
         <Divider sx={{mb:2}}/>
         <Typography paragraph>
-          <ResultBox notInput={values.value01==null}>
+          <ResultBox notinput={values.value01==null}>
             {mainProcessing(values.value01) as any}
           </ResultBox>
         </Typography>

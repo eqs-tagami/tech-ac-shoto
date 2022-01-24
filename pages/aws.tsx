@@ -16,7 +16,7 @@ const Page: NextPage = () => {
         <title>AWSへデプロイ - Daichi Next</title>
       </Head>
       <Layout>
-        <Typography paragraph variant="h1" component="h1" sx={{fontSize:'36px',fontWeight:700,mb:0.5}}>
+        <Typography paragraph variant="h1" component="h1" sx={{fontSize:'32px',fontWeight:700,mb:0.5}}>
           AWSへデプロイ
         </Typography>
         <Divider sx={{mb:2}}/>
