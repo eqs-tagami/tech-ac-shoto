@@ -75,7 +75,7 @@ const Page: NextPage = () => {
         </Typography>
         <Divider sx={{mb:2}}/>
         <Typography paragraph>
-          <ResultBox notinput={values.value01==null}>
+          <ResultBox notinput={Boolean(values.value01==null)}>
             {mainProcessing(values.value01) as any}
           </ResultBox>
         </Typography>

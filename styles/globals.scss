@@ -1,10 +1,10 @@
 @import "sanitize";
 
-body, html {
+html, body {
   height: 100%;
 }
-body {
-  background-color: #f1f3f4;
+html body {
+  background-color: #f8fafb;
 }
 #__next{
   height: 100%;
